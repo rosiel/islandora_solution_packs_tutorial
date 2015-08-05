@@ -8,6 +8,8 @@ Solution packs are drupal modules that define, for a type of object, what happen
 
 Objects may be simple or complex, but will always represent a digital asset in a meaningful way. 
 
+## Note on where to implement hooks
+Implement hook_foo() with a function in your [solution_pack_name].module file named [solution_pack_name]_foo(). If it's not in the .module file, it won't be seen by Drupal. If your module isn't enabled, it won't be seen either. 
 
 ## Required Objects
 
@@ -24,12 +26,19 @@ A solution pack should define the form to use for ingest/editing. This is a two-
 Unlike forms that were uploaded through the GUI, forms that were registered in code cannot be deleted, and associations cannot be removed (though they can be disabled). You can see them in the XML form associations (admin/islandora/xmlform). 
 
 ## Ingest Steps
-By default, the ingest steps include
-* an option to upload the object from FoXML
+By default, the ingest steps for any Islandora object include
+* an option to upload the object from a FOXML file
 * selecting a content model (if the collection policy allows multiple)
 * selecting a form (if the form associations associate multiple with the chosen cmodel)
 
 But the solution pack needs provide the form to upload the OBJ (if applicable), or any other datastreams. It does this with ```hook_islandora_ingest_steps()``` or ```hook_CMODEL_PID_islandora_ingest_steps()```. This points to a Drupal form which is, by convention, located in the solution pack's /include/CMODEL_upload.form.inc. That file includes the form definition (by Drupal's magic naming conventions, this is in a function with the name that is the same as the form_id), and what to do when the form is submitted (by Drupal's magic naming conventions, this is in a function named FORM_ID_submit()).
 
+## Derivatives
+Define what derivatives should be generated using ```hook_islandora_CMODEL_PID_derivative()```. The actual code to create the derivatives should be in /includes/derivatives.inc.
+
+## Display
+Implement hook_CMODEL_PID_islandora_view_object(). If you don't, a default function will kick in, but this lets you configure how your objects' pages appear. This function returns a keyed array of _themed output_ (i.e. call theme() to generate html). This means you might want to use hook_theme() and define your own themes.
+
+## Delete
 
 
