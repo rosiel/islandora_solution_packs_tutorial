@@ -38,7 +38,7 @@ But the solution pack needs provide the form to upload the OBJ (if applicable), 
 Define what derivatives should be generated using `hook_islandora_CMODEL_PID_derivative()`. The actual code to create the derivatives should be in /includes/derivatives.inc.
 
 ## Display
-Implement hook_CMODEL_PID_islandora_view_object(). If you don't, a default function will kick in, but this lets you configure how your objects' pages appear. This function returns a keyed array of _themed output_ (i.e. call theme() to generate html). This means you might want to use hook_theme() and define your own themes.
+Implement `hook_CMODEL_PID_islandora_view_object()`. If you don't, a default function will kick in, but this lets you configure how your objects' pages appear. This function returns a keyed array of _themed output_ (i.e. call `theme()` to generate html). This means you might want to use `hook_theme()` and define your own themes.
 
 ## Delete
 
