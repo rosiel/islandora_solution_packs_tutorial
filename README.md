@@ -1,6 +1,6 @@
 # islandora_solution_packs_tutorial
 ## What is a solution pack?
-Solution packs are drupal modules that define, for a type of object, what happens throughout that  object's lifecycle. A solution pack defines what happens on:
+Solution packs are Drupal modules that define, for a type of object, what happens throughout that  object's lifecycle. A solution pack defines what happens on:
 * ingest - what forms are associated with this content type? What datastreams do they write to? Are there other steps during the ingest process? What other objects will this be associated with? 
 * post-ingest - what derivatives are created?
 * display - how does the object's page look?
