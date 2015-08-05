@@ -6,7 +6,7 @@ Solution packs are Drupal modules that define, for a type of object, what happen
 * display - how does the object's page look?
 * delete/purge - does the deletion cascade?
 
-Objects may be simple or complex, but will always represent a digital asset in a meaningful way. 
+Objects may be simple or complex, but will always represent a digital asset in a meaningful way. Example: https://github.com/Islandora/islandora_solution_pack_image 
 
 ## Note on where to implement hooks
 Implement `hook_foo()` with a function in your `solution_pack_name.module` file named `solution_pack_name_foo()`. If it's not in the `.module` file, it won't be seen by Drupal. If your module isn't enabled, it won't be seen either. 
@@ -19,6 +19,8 @@ Before a solution pack can define behaviours relating to a content type, it need
 To let Islandora recognize this new content model, the solution pack must ingest an object of type 'fedora-system:ContentModel-3.0'. The DS-COMPOSITE-MODEL datastream of this content model object defines what datastreams are required or expected for objects of this model. This definition is for illustration only; is not enforced (in 7.x).
 ### Default collection 
 Islandora won't let you ingest an object without a collection configured to allow this content model. By convention, a solution pack will provide a new collection (within islandora:root) with this content model in its Collection Policy. Users aren't necessarily expected to put their objects in this collection, but it's a courtesy so they can start using the content model immediately, and so that something shows up in the Islandora Repository to signify that this solution pack has been enabled.
+
+To have these objects automatically created when the module is enabled, use a `.install` file and implement `hook_install()` and `hook_uninstall()` to call `islandora_install_solution_pack()`.  
 
 ## Form Associations
 A solution pack should define the metadata form to use for ingest/editing. This is a two-step process, similar to doing this in the GUI, where one needs to upload (and name) a form from an XML file, then create associations to content types and datastream. 
