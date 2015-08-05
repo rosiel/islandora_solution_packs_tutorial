@@ -18,4 +18,18 @@ To let Islandora recognize this new content model, the solution pack must ingest
 Islandora won't let you ingest an object without a collection configured to allow this content model. By convention, a solution pack will provide a collection with this content model in its Collection Policy.
 
 ## Form Associations
-A solution pack should define the form to use for ingest/editing. This is given as an xml file and is registered using ```hook_islandora_xml_form_builder_form_associations()```. The association links this form to a specific datastream of this content model. 
+A solution pack should define the form to use for ingest/editing. This is a two-step process, similar to the GUI, where one needs to upload (and name) a form from an XML file, then create associations to content types and datastream. 
+*  ```hook_islandora_xml_form_builder_forms()``` creates the form from an XML file and names it.  
+*  ```hook_islandora_xml_form_builder_form_associations()``` creates an association linking this form to a specific datastream of this content model. 
+Unlike forms that were uploaded through the GUI, forms that were registered in code cannot be deleted, and associations cannot be removed (though they can be disabled). You can see them in the XML form associations (admin/islandora/xmlform). 
+
+## Ingest Steps
+By default, the ingest steps include
+* an option to upload the object from FoXML
+* selecting a content model (if the collection policy allows multiple)
+* selecting a form (if the form associations associate multiple with the chosen cmodel)
+
+But the solution pack needs provide the form to upload the OBJ (if applicable), or any other datastreams. It does this with ```hook_islandora_ingest_steps()``` or ```hook_CMODEL_PID_islandora_ingest_steps()```. This points to a Drupal form which is, by convention, located in the solution pack's /include/CMODEL_upload.form.inc. That file includes the form definition (by Drupal's magic naming conventions, this is in a function with the name that is the same as the form_id), and what to do when the form is submitted (by Drupal's magic naming conventions, this is in a function named FORM_ID_submit()).
+
+
+
