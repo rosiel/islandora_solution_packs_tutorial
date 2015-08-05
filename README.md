@@ -32,7 +32,7 @@ By default, the ingest steps for any Islandora object include
 * selecting a content model (if the collection policy allows multiple)
 * selecting a form (if the form associations associate multiple with the chosen cmodel)
 
-But the solution pack needs provide the form to upload the OBJ (if applicable), or any other datastreams. It does this with `hook_islandora_ingest_steps()` or `hook_CMODEL_PID_islandora_ingest_steps()`. This points to a Drupal form which is, by convention, located in the solution pack's /include/CMODEL_upload.form.inc. That file includes the form definition (by Drupal's magic naming conventions, this is in a function with the name that is the same as the form_id), and what to do when the form is submitted (by Drupal's magic naming conventions, this is in a function named FORM_ID_submit()).
+But the solution pack needs provide the form to upload the OBJ (if applicable), or any other datastreams. It does this with `hook_islandora_ingest_steps()` or `hook_CMODEL_PID_islandora_ingest_steps()`. This points to a Drupal form which is, by convention, located in the solution pack's /include/CMODEL_upload.form.inc. That file includes the form definition (by Drupal's magic naming conventions, this is in a function with the name that is the same as the form_id), and what to do when the form is submitted (by Drupal's magic naming conventions, this is in a function named `FORM_ID_submit()`).
 
 ## Derivatives
 Define what derivatives should be generated using `hook_islandora_CMODEL_PID_derivative()`. The actual code to create the derivatives should be in /includes/derivatives.inc.
