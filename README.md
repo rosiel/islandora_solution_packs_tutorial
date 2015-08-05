@@ -38,8 +38,8 @@ But the solution pack needs provide the form to upload the OBJ (if applicable), 
 Define what derivatives should be generated using `hook_islandora_CMODEL_PID_derivative()`. The actual code to create the derivatives should be in /includes/derivatives.inc.
 
 ## Display
-Implement `hook_CMODEL_PID_islandora_view_object()`. If you don't, a default function will kick in, but this lets you configure how your objects' pages appear. This function returns a keyed array of _themed output_ (i.e. call `theme()` to generate html). This means you might want to use `hook_theme()` and define your own themes.
+Implement `hook_CMODEL_PID_islandora_view_object()`. This function returns a keyed array of _themed output_ (i.e. call `theme()` to generate html). This means you might want to use `hook_theme()` and define your own themes. If you don't implement this hook, a default function `islandora_default_islandora_view_object()` will kick in and show some basic metadata, but this lets you configure how your objects' pages appear. 
 
 ## Delete
-
+If you have a complex object model, such as a Book or Newspaper, you may want to let the users delete an object _and all its child_ objects. Only do this if you're certain that child objects can't have multiple parents (or provide logic to mitigate that). An example is how islandora_solution_pack_newspaper implements `hook_form_islandora_object_properties_form_alter()`.
 
